@@ -8,8 +8,9 @@ pageextension 50101 "CSD ResourceListExt" extends "Resource List"
         }
         addafter(Type){
             field("CSD Resource Type"; Rec."CSD Resource Type"){}
-            field("CSD Maximum Participants"; Rec."CSD Maximum Participants"){}
-
+            field("CSD Maximum Participants"; Rec."CSD Maximum Participants"){
+                Visible = ShowMaxField;
+            }
         }
     }
     
