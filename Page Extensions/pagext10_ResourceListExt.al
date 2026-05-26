@@ -1,4 +1,4 @@
-pageextension 50101 "CSD ResourceListExt" extends "Resource List"
+pageextension 50105 "CSD ResourceListExt" extends "Resource List"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 {
     layout
@@ -7,9 +7,12 @@ pageextension 50101 "CSD ResourceListExt" extends "Resource List"
             Visible = ShowType;
         }
         addafter(Type){
-            field("CSD Resource Type"; Rec."CSD Resource Type"){}
+            field("CSD Resource Type"; Rec."CSD Resource Type"){
+                ApplicationArea = All;
+            }
             field("CSD Maximum Participants"; Rec."CSD Maximum Participants"){
                 Visible = ShowMaxField;
+                ApplicationArea = All;
             }
         }
     }
