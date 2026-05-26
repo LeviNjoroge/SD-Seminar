@@ -22,12 +22,6 @@ pageextension 50100 "CSD ResourceCardExt" extends "Resource Card"
             }
         }
     }
-    
-    actions
-    {
-        // Add changes to page actions here
-    }
-    
     trigger OnAfterGetRecord()
     begin
         ShowMaxField := (Rec.Type = Rec.Type::Machine);
@@ -35,5 +29,6 @@ pageextension 50100 "CSD ResourceCardExt" extends "Resource Card"
     end;
 
     var
+        // [InDataSet]
         ShowMaxField : Boolean;
 }
