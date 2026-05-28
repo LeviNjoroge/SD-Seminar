@@ -19,7 +19,7 @@ table 50100 "CSD Seminar Setup"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
-        field(40; "Posted Seminar Reg. Nos. "; Code[20])
+        field(40; "Posted Seminar Reg. Nos."; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
