@@ -27,7 +27,7 @@ jobs:
       - name: Compile AL project
         shell: pwsh
         run: |
-          # Path where your AL project is
+          # Path where your AL project is...
           $projectPath = "$(Get-Location)"
 
           # Output folder for app
