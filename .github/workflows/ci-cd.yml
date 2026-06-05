@@ -1,0 +1,48 @@
+name: BC CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build AL Extension
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PowerShell
+        shell: pwsh
+        run: |
+          Write-Host "Starting Build Process..."
+
+      - name: Install BcContainerHelper
+        shell: pwsh
+        run: |
+          Install-Module BcContainerHelper -Force -Scope CurrentUser
+
+      - name: Compile AL project
+        shell: pwsh
+        run: |
+          # Path where your AL project is
+          $projectPath = "$(Get-Location)"
+
+          # Output folder for app
+          $outputPath = "$projectPath\output"
+
+          New-Item -ItemType Directory -Force -Path $outputPath
+
+          # Build app using AL compiler (inside container context)
+          Compile-AppInBcContainer `
+            -containerName "bcserver" `
+            -appProjectFolder $projectPath `
+            -appOutputFolder $outputPath
+
+      - name: Upload artifact (.app file)
+        uses: actions/upload-artifact@v4
+        with:
+          name: bc-extension
+          path: output/*.app
