@@ -37,10 +37,16 @@ jobs:
           New-Item -ItemType Directory -Force -Path $outputPath
 
           # Build app using AL compiler (inside container context)
+          $credential = New-Object PSCredential (
+              "admin",
+              (ConvertTo-SecureString "YourPassword" -AsPlainText -Force)
+          )
+
           Compile-AppInBcContainer `
-            -containerName "bcserver" `
-            -appProjectFolder $projectPath `
-            -appOutputFolder $outputPath
+              -containerName "bcserver" `
+              -credential $credential `
+              -appProjectFolder $projectPath `
+              -appOutputFolder $outputPath
 
       - name: Upload artifact (.app file)
         uses: actions/upload-artifact@v4
