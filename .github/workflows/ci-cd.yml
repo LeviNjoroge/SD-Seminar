@@ -29,7 +29,7 @@ jobs:
         shell: pwsh
         run: |
           # Path where your AL project is.....
-          $projectPath = $env:GITHUB_WORKSPACE
+          $projectPath = "$(Get-Location)"
 
           # Output folder for app
           $outputPath = "$projectPath\output"
