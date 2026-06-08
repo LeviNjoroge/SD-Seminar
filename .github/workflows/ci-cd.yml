@@ -45,8 +45,8 @@ jobs:
           # set up your credentials; username and password you had used in your configurations, here
           # its in the form of (username, (encrypted password))
           $credential = New-Object PSCredential (
-              $env:BC_USERNAME,
-              (ConvertTo-SecureString $env:BC_PASSWORD -AsPlainText -Force)
+              "admin",
+              (ConvertTo-SecureString "admin" -AsPlainText -Force)
           )
 
           Compile-AppInBcContainer `
