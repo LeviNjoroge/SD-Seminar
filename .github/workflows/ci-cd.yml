@@ -23,6 +23,11 @@ jobs:
         shell: pwsh
         run: |
           Install-Module BcContainerHelper -Force -Scope CurrentUser
+        
+      - name: Check if BC is available
+        shell: pwsh
+        run: |
+          Get-NAVServerInstance
 
       - name: Compile AL project
         shell: pwsh
