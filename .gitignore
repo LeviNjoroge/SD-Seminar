@@ -1,3 +1,4 @@
-# /.alpackages
+/.alpackages
 /.vscode
 /.snapshots
+.env
