@@ -41,10 +41,14 @@ jobs:
 
           New-Item -ItemType Directory -Force -Path $outputPath
 
+          # share the project file
+          New-BcContainerFileShare `
+            -containerName bcserver `
+            -hostFolder "C:\Users\Levi\Desktop\Attachment\SD Seminar"
+
           # Build app using AL compiler (inside container context)
           Compile-AppInBcContainer `
             -containerName "bcserver" `
-            -hostFolder "C:\Users\Levi\Desktop\Attachment\SD Seminar"
             -appProjectFolder $projectPath `
             -appOutputFolder $outputPath
 
