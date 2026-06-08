@@ -39,7 +39,7 @@ jobs:
           # Build app using AL compiler (inside container context)
           $credential = New-Object PSCredential (
               "admin",
-              (ConvertTo-SecureString "YourPassword" -AsPlainText -Force)
+              (ConvertTo-SecureString "admin" -AsPlainText -Force)
           )
 
           Compile-AppInBcContainer `
