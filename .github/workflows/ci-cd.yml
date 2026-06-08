@@ -29,7 +29,7 @@ jobs:
         shell: pwsh
         run: |
           # Path where your AL project is.....
-          $projectPath = "C:\ProgramData\BcContainerHelper\Projects\SD Seminar"
+          $projectPath = $env:GITHUB_WORKSPACE
 
           # Output folder for app
           $outputPath = "$projectPath\output"
