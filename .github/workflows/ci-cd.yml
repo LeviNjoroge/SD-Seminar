@@ -33,7 +33,7 @@ jobs:
         shell: pwsh
         run: |
           # Path where your AL project is.....
-          $projectPath = "$(Get-Location)"
+          $projectPath = "C:\Users\Levi\Desktop\Attachment\SD Seminar"
 
           # Output folder for app
           $outputPath = "$projectPath\output"
