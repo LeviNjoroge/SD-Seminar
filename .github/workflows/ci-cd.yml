@@ -1,19 +1,21 @@
 name: BC CI/CD Pipeline
 
+# trigger
 on:
   push:
-    branches:
-      - main
+    branches: [main] # Means this will run only when you push to main branch
 
 
 jobs:
   build:
     name: Build AL Extension
+    # hosted on: this specifies that the pipeline is actually hosted and runs lockally on your machine!
     runs-on: self-hosted
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        # copys your project into a sandbox environment to run the pipeline over it
 
       - name: Setup PowerShell
         shell: pwsh
@@ -24,19 +26,24 @@ jobs:
         shell: pwsh
         run: |
           Install-Module BcContainerHelper -Force -Scope CurrentUser
+        # Installs the BcContainerHelper in this sandbox. This is a Powershell toolkit for BC on Docker
 
       - name: Compile AL project
         shell: pwsh
         run: |
-          # Path where your AL project is.....
+          # Path where your AL project is... CUSTOMISE ACCORDINGLY!
           $projectPath = "C:\ProgramData\BcContainerHelper\Projects\SD Seminar"
+          # Ensure that the project in this dir is shared with BC, 
+          # Normally, you would want to store your project under the "C:\ProgramData\BcContainerHelper" dir
 
-          # Output folder for app
+          # Output folder for app, DO NOT TOUCH
           $outputPath = "$projectPath\output"
 
           New-Item -ItemType Directory -Force -Path $outputPath
 
           # Build app using AL compiler (inside container context)
+          # set up your credentials; username and password you had used in your configurations, here
+          # its in the form of (username, (encrypted password))
           $credential = New-Object PSCredential (
               "admin",
               (ConvertTo-SecureString "admin" -AsPlainText -Force)
@@ -50,6 +57,7 @@ jobs:
 
       - name: Upload artifact (.app file)
         uses: actions/upload-artifact@v4
+        # this now creates an output for the app that you've created
         with:
           name: bc-extension
           path: output/*.app
